@@ -3,7 +3,6 @@ from pages.base_page import BasePage
 class LoginPage(BasePage):
     def __init__(self, page):
         super().__init__(page) #initialize constructor of a parent class
-        self.base_url = "https://www.saucedemo.com/"
         
         # selectors
         self.username_input = "#user-name"
@@ -11,8 +10,8 @@ class LoginPage(BasePage):
         self.login_button = "#login-button"
         self.error_message = "[data-test='error']"
 
-    def open(self):
-        self.navigate(self.base_url)
+    def open(self, url):
+        self.navigate(url)
 
     def login(self, username, password):
         self.fill(self.username_input, username)

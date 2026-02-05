@@ -1,0 +1,3 @@
+__pycache__/
+secret_config.json
+.pytest_cache/
