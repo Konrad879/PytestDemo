@@ -3,7 +3,7 @@ from pages.login_page import LoginPage
 
 def test_valid_login(page_fixture):
     login_page = LoginPage(page_fixture)
-    login_page.navigate()
+    login_page.open()
 
     login_page.login("standard_user", "secret_sauce")
 
@@ -11,7 +11,7 @@ def test_valid_login(page_fixture):
 
 def test_invalid_login(page_fixture):
     login_page = LoginPage(page_fixture)
-    login_page.navigate()
+    login_page.open()
 
     login_page.login("incorrect_user", "incorrect_password")
 
