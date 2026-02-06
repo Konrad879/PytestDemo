@@ -1,6 +1,22 @@
 import pytest
+from datetime import datetime
 import json
 from playwright.sync_api import sync_playwright
+
+
+@pytest.hookimpl(hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    outcome = yield
+    report = outcome.get_result()
+    
+    if report.when == "call" and report.failed:
+        page = item.funcargs.get("page_fixture", None)
+        if page:
+            timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+            screenshot_name = f"screenshots/{item.name}_{timestamp}.png"
+            page.screenshot(path=screenshot_name)
+            print(f"\nZrobiono screenshot: {screenshot_name}")
+
 
 @pytest.fixture(scope='session')
 def config():
